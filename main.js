@@ -26,7 +26,6 @@ function draw() {
     for (let i = 0; i < 1000; i++) {
         // choose a random point in the complex plane
         const c = math.complex(Math.random() * 4 - 2, Math.random() * 4 - 2);
-        //console.log(c);
         // draw the point
         const iterations = mandelbrot(c);
         ctx.fillStyle = 'rgb(' + iterations + ', ' + iterations + ', ' + iterations + ')';
@@ -42,7 +41,8 @@ function mandelbrot(c) {
     }
     let z = math.complex(0, 0);
     for (let i = 0; i < 255; i++) {
-        z = math.add(math.multiply(z, z), c);
+        //z = math.add(math.multiply(z, z), c);
+        z = math.chain(z).multiply(z).add(c).done();
         if (z.abs() > 2) {
             return i;
         }
